@@ -11,8 +11,8 @@
 # Sample Usage:
 #
 class lamp{
-  include apache
-  include php
-  include mysql
-  include phpmyadmin
+  include lamp::apache
+  include lamp::php
+  include lamp::mysql
+  include lamp::phpmyadmin
 }

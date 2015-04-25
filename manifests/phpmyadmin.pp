@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class phpmyadmin {
+class lamp::phpmyadmin {
   # install phpmyadmin
   package { 'phpmyadmin':
     ensure  => present,

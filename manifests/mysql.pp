@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class mysql {
+class lamp::mysql {
   # root password
   $rootPass = 'password'
 

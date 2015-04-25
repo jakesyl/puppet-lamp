@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class php {
+class lamp::php {
   # list of packages
   $packages = [
     'php5',

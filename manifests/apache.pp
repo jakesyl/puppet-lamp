@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class apache {
+class lamp::apache {
   # install apache package
   package { 'apache2':
     ensure  => present,

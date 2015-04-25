@@ -25,4 +25,11 @@ class php {
     require => [Package["apache2"],Package["libapache2-mod-php5"],Package["mcrypt"]],
     notify => Service["apache2"]
   }
+  
+  #enable php5 mods
+  exec { "php5enmod mcrypt":
+    command => "php5enmod mcrypt",
+    notify => Service["apache2"],
+    require => Package["php5-mcrypt"]
+  }
 }

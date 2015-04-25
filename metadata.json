@@ -14,5 +14,5 @@
   "source": "https://github.com/darkmantle-puppet-lamp",
   "summary": "LAMP Stack using Apache and PHP5",
   "tags": ["apache","mysql","phpmyadmin","linux","lamp","webserver"],
-  "version": "1.0.1"
+  "version": "1.0.2"
 }

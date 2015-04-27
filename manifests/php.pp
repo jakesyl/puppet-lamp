@@ -9,7 +9,7 @@
 # Requires: see metadata.json
 #
 # Sample Usage:
-# 
+#
 # You can either include this class or define a class with custom packages:
 #   class { 'lamp::php': php5Packages => ['intl','mcrypt'] }
 #
@@ -28,10 +28,10 @@ class lamp::php ($php5Packages = ['']) {
     ensure  => present,
     require => Exec['apt-get update']
   }
-  
+
   #install user packages
   package { $php5Packages:
-    ensure => present,
+    ensure  => present,
     require => Exec['apt-get update']
   }
 
@@ -41,15 +41,6 @@ class lamp::php ($php5Packages = ['']) {
     require => [Package['apache2'], Package['libapache2-mod-php5']],
     notify  => Service['apache2']
   }
-  
-  define php5mods {
-    # enable php5 mods
-	  exec { 'php5enmod ${title}':
-	    command => 'php5enmod ${title}',
-	    notify  => Service['apache2'],
-	    require => Package['php5-${title}']
-	  }
-  }
-  
+
   php5mods {$php5Packages:}
 }

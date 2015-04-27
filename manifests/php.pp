@@ -42,5 +42,5 @@ class lamp::php ($php5Packages = ['']) {
     notify  => Service['apache2']
   }
 
-  php5mods {$php5Packages:}
+  lamp::php5mods {$php5Packages:}
 }

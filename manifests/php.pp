@@ -2,46 +2,54 @@
 #
 # This module manages php
 #
-# Parameters: none
-#
-# Actions:
+# Parameters:
+# [*userPackages*]
+#   A list of custom php5-* packages to install
 #
 # Requires: see metadata.json
 #
 # Sample Usage:
+# 
+# You can either include this class or define a class with custom packages:
+#   class { 'lamp::php': php5Packages => ['intl','mcrypt'] }
 #
-class lamp::php {
-  # list of packages
+class lamp::php ($php5Packages = ['']) {
+  # list of default packages
   $packages = [
     'php5',
     'php5-cli',
     'php5-mysql',
     'php-pear',
     'php5-dev',
-    'php5-gd',
-    'php5-mcrypt',
-    'php5-xsl',
     'php5-intl',
-    'libapache2-mod-php5',
-    'mcrypt']
+    'libapache2-mod-php5']
 
   package { $packages:
     ensure  => present,
-    require => [Exec['apt-get update']]
+    require => Exec['apt-get update']
+  }
+  
+  #install user packages
+  package { $php5Packages:
+    ensure => present,
+    require => Exec['apt-get update']
   }
 
   # enable php in apache
   exec { 'a2enmod php5':
     command => '/usr/sbin/a2enmod php5',
-    require => [Package['apache2'], Package['libapache2-mod-php5'],
-                Package['mcrypt']],
+    require => [Package['apache2'], Package['libapache2-mod-php5']],
     notify  => Service['apache2']
   }
-
-  # enable php5 mods
-  exec { 'php5enmod mcrypt':
-    command => 'php5enmod mcrypt',
-    notify  => Service['apache2'],
-    require => Package['php5-mcrypt']
+  
+  define php5mods {
+    # enable php5 mods
+	  exec { 'php5enmod ${title}':
+	    command => 'php5enmod ${title}',
+	    notify  => Service['apache2'],
+	    require => Package['php5-${title}']
+	  }
   }
+  
+  php5mods {$php5Packages:}
 }

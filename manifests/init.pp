@@ -10,9 +10,4 @@
 #
 # Sample Usage:
 #
-class lamp{
-  include lamp::apache
-  include lamp::php
-  include lamp::mysql
-  include lamp::phpmyadmin
-}
+class lamp{}
